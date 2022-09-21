@@ -13,6 +13,7 @@ plugins {
     id 'java'
     id 'idea'
     id 'maven-publish'
+    id "de.undercouch.download" version "5.2.0"
 }
 
 repositories {
@@ -50,3 +51,19 @@ gradlePlugin {
         }
     }
 }
+
+ext {
+    sde = [:]
+    sde.home = System.getenv("HOME") + "/.sde"
+    sde.cache = sde.home + "/cache"
+}
+
+
+tasks.register('jenkins-war-download') {
+    doLast {
+        // https://updates.jenkins-ci.org/download/war/2.370/jenkins.war
+        println sde.home
+        println sde.cache
+    }
+}
+
