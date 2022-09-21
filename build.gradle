@@ -1,0 +1,52 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'org.codehaus.groovy', name: 'groovy-json', version: '3.0.13'
+    }
+}
+
+plugins {
+    id 'java-gradle-plugin'
+    id 'groovy'
+    id 'java'
+    id 'idea'
+    id 'maven-publish'
+}
+
+repositories {
+    mavenCentral()
+}
+
+description = 'SDE Software Developer Environment'
+group = "com.one38over.sde"
+version = "0.1"
+
+dependencies {
+    implementation 'org.codehaus.groovy:groovy:3.0.13'
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'com.typesafe:config:1.4.2'
+    testImplementation platform("org.spockframework:spock-bom:2.2-groovy-3.0")
+    testImplementation "org.spockframework:spock-core"
+    testImplementation "org.spockframework:spock-junit4"
+}
+
+
+testing {
+    suites {
+        test {
+            useSpock()
+        }
+    }
+}
+
+
+gradlePlugin {
+    plugins {
+        customPlugin {
+            id = 'com.one38over.sde'
+            implementationClass = 'com.one38over.gradle.SDEPlugin'
+        }
+    }
+}
